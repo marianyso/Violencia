@@ -21,6 +21,6 @@ urlpatterns = [
 
     path("voluntarias/", VoluntariasView.as_view(), name="voluntarias"),
 
-    path("HistoriaSuperacao/", HistoriaSuperacaoView.as_view(), name="historiasuperacao"),
+    path("historias/", HistoriaSuperacaoView.as_view(), name="historias"),
 
 ]

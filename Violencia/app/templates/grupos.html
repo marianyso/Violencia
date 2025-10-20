@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -7,108 +6,109 @@
     <title>Grupos de Apoio - Sistema de Apoio à Mulher</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
     <style>
-        /* Cores Personalizadas */
+        /* Cores Personalizadas — suavizadas e harmoniosas */
         :root {
             --primary-pink: #FFC0CB;
-            --darker-pink: #FF69B4; /* Rosa choque */
-            --light-bg: #FFF0F5; /* Fundo rosa muito claro  */
-            --text-color: #333333; 
-            --light-text: #555555; 
-            --card-bg: #FFFFFF;
-            --card-border: #FFD1DC; 
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --darker-purple: #ec37a1;
+            --darker-pink: #FF69B4;
+            --soft-pink: #ffd6e0;
+            --light-bg: #fdf6f9;
+            --text-color: #2c2c2c;
+            --light-text: #6b6b6b;
+            --card-bg: #ffffff;
+            --card-border: #ffd1dc;
+            --shadow-color: rgba(255, 105, 180, 0.1);
+            --darker-purple: #e73b9e;
+            --accent-green: #4caf50;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light-bg);
+            font-family: 'Segoe UI', 'Nunito', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(140deg, #fff9fb 0%, #fdf6f9 100%);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.7;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            padding-top: 10px;
         }
 
         main {
             flex: 1;
         }
 
+        /* Navbar */
         .navbar {
-            background-color: var(--darker-pink) !important; 
-            padding: 15px 30px;
-            box-shadow: 0 2px 10px var(--shadow-color);
+            background: linear-gradient(90deg, var(--darker-pink), var(--darker-purple)) !important;
+            padding: 14px 24px;
+            box-shadow: 0 4px 12px rgba(231, 59, 158, 0.2);
+            border-radius: 0 0 16px 16px;
+            margin-bottom: 20px;
         }
 
         .navbar-brand {
-            color: rgb(247, 231, 244) !important;
-            font-weight: bold;
-            font-size: 1.3rem;
+            color: white !important;
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
             display: flex;
             align-items: center;
         }
 
         .navbar-brand .icon {
-            margin-right: 8px;
-            font-size: 1.5rem;
+            margin-right: 10px;
+            font-size: 1.6rem;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
         }
 
         .nav-link {
-            color: rgb(245, 236, 243) !important;
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            color: rgba(255, 255, 255, 0.92) !important;
+            font-weight: 600;
+            font-size: 1.02rem;
+            padding: 0.55rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin: 0 4px;
         }
 
         .nav-link:hover,
         .nav-link.active {
-            background-color: var(--darker-purple) !important;
-            color: rgb(251, 239, 252) !important;
-        }
-
-        .dropdown-menu {
-            background-color: var(--darker-pink);
-            border: none;
-        }
-
-        .dropdown-item {
-            color: rgb(244, 236, 245);
-            transition: background-color 0.3s ease;
-        }
-
-        .dropdown-item:hover {
-            background-color: var(--primary-pink);
-            color: rgb(210, 203, 212);
+            background-color: rgba(255, 255, 255, 0.15) !important;
+            color: white !important;
+            transform: translateY(-1px);
         }
 
         .btn-emergency {
-            background-color: var(--darker-purple);
-            color: rgb(253, 253, 253);
+            background: linear-gradient(to right, var(--darker-purple), var(--darker-pink));
+            color: white;
             font-weight: bold;
             border: none;
-            padding: 10px 22px;
+            padding: 10px 24px;
             font-size: 1rem;
             border-radius: 30px;
-            box-shadow: 0 4px 10px var(--darker-pink);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(231, 59, 158, 0.3);
+            transition: all 0.35s ease;
+            font-family: inherit;
         }
 
         .btn-emergency:hover {
-            background-color: var(--darker-pink);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px var(--shadow-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(231, 59, 158, 0.45);
+            background: linear-gradient(to right, var(--darker-pink), #ff5ca8);
         }
 
+        /* Título */
         h2 {
             color: var(--darker-pink);
-            font-weight: bold;
-            margin-bottom: 30px;
+            font-weight: 800;
+            margin-bottom: 28px;
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
             text-align: center;
+            font-size: 2.1rem;
+            letter-spacing: -0.5px;
         }
 
         h2::after {
@@ -117,60 +117,184 @@
             left: 50%;
             bottom: 0;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--primary-pink);
-            border-radius: 5px;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(to right, var(--darker-pink), var(--darker-purple));
+            border-radius: 10px;
         }
 
-        .footer {
-            text-align: center;
-            padding: 30px 0;
-            background-color: var(--darker-pink);
-            color: white;
-            margin-top: 60px;
-            box-shadow: 0 -2px 10px var(--shadow-color);
+        /* Container principal */
+        .container-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(255, 105, 180, 0.12);
+            padding: 36px;
+            margin-top: 20px;
+            border: 1px solid var(--card-border);
         }
 
-        .footer p {
-            margin-bottom: 5px;
-            font-size: 0.9rem;
+        /* Caixa informativa */
+        .info-box {
+            background: linear-gradient(135deg, #f8f0f4 0%, #fdf6f9 100%);
+            border-left: 4px solid var(--darker-pink);
+            padding: 18px 20px;
+            border-radius: 12px;
+            margin-bottom: 32px;
+            color: var(--text-color);
+            font-size: 1.02rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
         }
 
-        .table-container {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 4px 15px var(--shadow-color);
-            padding: 20px;
-            margin-top: 30px;
+        .info-box i {
+            color: var(--darker-purple);
+            margin-right: 10px;
+            font-size: 1.2rem;
         }
 
-        .table-striped tbody tr:nth-of-type(odd) {
-            background-color: var(--light-bg);
+        /* Cards de grupo */
+        .group-card {
+            background: linear-gradient(140deg, #ffffff 0%, #fff9fc 100%);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: all 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
         }
 
-        .table-bordered th,
-        .table-bordered td {
-            border-color: var(--card-border);
+        .group-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--darker-pink), var(--darker-purple));
         }
 
-        .thead-dark th {
-            background-color: var(--darker-pink);
-            color: white;
+        .group-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 24px rgba(231, 59, 158, 0.18);
             border-color: var(--darker-pink);
         }
 
-        .table-hover tbody tr:hover {
-            background-color: var(--primary-pink) !important;
-            color: white;
+        .group-card h5 {
+            color: var(--darker-pink);
+            font-weight: 700;
+            margin-bottom: 18px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .table-hover tbody tr:hover td {
-            color: white;
+        .group-info {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 1.02rem;
         }
 
-        .text-muted {
-            color: var(--light-text) !important;
+        .group-info i {
+            color: var(--darker-purple);
+            margin-right: 12px;
+            min-width: 24px;
+            font-size: 1.1rem;
+            margin-top: 4px;
+        }
+
+        .group-info strong {
+            color: var(--text-color);
+            min-width: 130px;
+            font-weight: 600;
+        }
+
+        .group-info span {
+            color: var(--light-text);
+            line-height: 1.5;
+        }
+
+        /* Estado vazio */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-state i {
+            font-size: 5rem;
+            color: var(--soft-pink);
+            margin-bottom: 22px;
+            opacity: 0.8;
+        }
+
+        .empty-state p {
+            color: var(--light-text);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 12px;
+            line-height: 1.6;
+        }
+
+        .empty-state .text-muted {
+            font-size: 1.05rem;
+            opacity: 0.85;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 28px 0;
+            background: linear-gradient(90deg, var(--darker-pink), var(--darker-purple));
+            color: white;
+            margin-top: 50px;
+            box-shadow: 0 -4px 12px rgba(231, 59, 158, 0.15);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .footer p {
+            margin-bottom: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container-content {
+                padding: 24px 20px;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .group-card h5 {
+                font-size: 1.25rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.25rem;
+            }
+
+            .nav-link {
+                font-size: 0.95rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container-content {
+                padding: 20px 16px;
+            }
+
+            .group-card {
+                padding: 20px;
+            }
+
+            .empty-state i {
+                font-size: 4rem;
+            }
         }
     </style>
 </head>
@@ -178,7 +302,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><span class="icon">🌸</span> Apoio a Mulher</a>
+            <a class="navbar-brand" href="/"><span class="icon">🌸</span> Apoio à Mulher</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Menu">
                 <span class="navbar-toggler-icon"></span>
@@ -187,14 +311,14 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="/">Início</a></li>
-                    <li class="nav-item"><a class="nav-link" href="denuncias.html">Denúncias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/denuncias/">Denúncias</a></li>
                     <li class="nav-item"><a class="nav-link" href="/informativos/">Informativos</a></li>
                     <li class="nav-item"><a class="nav-link" href="/chat/">Chat de Apoio</a></li>
                     <li class="nav-item"><a class="nav-link" href="/locais/">Locais de Apoio</a></li>
                     <li class="nav-item"><a class="nav-link active" href="/grupos/">Grupos de Apoio</a></li>
                     <li class="nav-item"><a class="nav-link" href="/localizacoes/">Localizações</a></li>
                     <li class="nav-item"><a class="nav-link" href="/voluntarias/">Voluntárias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/HistoriaSuperacao/">Histórias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/historias/">Histórias</a></li>
                     <li class="nav-item"><a class="nav-link" href="/admin/">Administração</a></li>
                 </ul>
             </div>
@@ -207,40 +331,47 @@
         </div>
     </nav>
 
-    <main class="container my-5">
-        <div class="table-container">
-            <h2>Grupos de Apoio</h2>
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Nome do grupo:</th>
-                            <th scope="col">Moderador</th>
-                            <th scope="col">Participantes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for grupo in grupos %}
-                        <tr>
-                            <td>{{ grupo.nome_grupo }}</td>
-                            <td>{{ grupo.moderador }}</td>
-                            <td>{{ grupo.participantes_anonimos }}</td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="5" class="text-center text-muted">Nenhum Grupo de Apoio registrado.</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+    <main class="container my-4">
+        <div class="container-content">
+            <h2><i class="fas fa-hand-holding-heart"></i> Grupos de Apoio</h2>
+
+            <div class="info-box">
+                <i class="fas fa-shield-alt"></i>
+                <strong>Você não está sozinha.</strong> Todos os grupos garantem anonimato, escuta sem julgamento e apoio emocional por pessoas treinadas. Participe quando se sentir pronta.
+            </div>
+
+            <div id="grupos-container">
+                {% for grupo in grupos %}
+                <div class="group-card">
+                    <h5><i class="fas fa-users"></i> {{ grupo.nome_grupo }}</h5>
+
+                    <div class="group-info">
+                        <i class="fas fa-user-tie"></i>
+                        <strong>Moderador(a):</strong>
+                        <span>{{ grupo.moderador }}</span>
+                    </div>
+
+                    <div class="group-info">
+                        <i class="fas fa-user-friends"></i>
+                        <strong>Participantes:</strong>
+                        <span>{{ grupo.participantes_anonimos }} mulheres (anonimato total)</span>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="empty-state">
+                    <i class="fas fa-heart-broken"></i>
+                    <p>Nenhum grupo de apoio disponível no momento.</p>
+                    <p class="text-muted">Estamos criando novos espaços seguros. Volte em breve ou entre em contato pelo Disque 180.</p>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>📞 Disque 180 - Central de Atendimento à Mulher</p>
-            <p>&copy; 2025 Sistema de Apoio à Mulher. Interface leve, discreta e responsiva.</p>
+            <p>📞 <strong>Disque 180</strong> – Central de Atendimento à Mulher (24h, gratuito)</p>
+            <p>&copy; 2025 Sistema de Apoio à Mulher. Um espaço seguro, discreto e feito com carinho.</p>
         </div>
     </footer>
 

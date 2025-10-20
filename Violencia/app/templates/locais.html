@@ -7,6 +7,7 @@
     <title>Locais de Apoio - Sistema de Apoio à Mulher</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <style>
         /* Cores Personalizadas */
@@ -137,40 +138,256 @@
             font-size: 0.9rem;
         }
 
-        .table-container {
+        .container-content {
             background-color: var(--card-bg);
             border-radius: 15px;
             box-shadow: 0 4px 15px var(--shadow-color);
-            padding: 20px;
+            padding: 30px;
             margin-top: 30px;
         }
 
-        .table-striped tbody tr:nth-of-type(odd) {
-            background-color: var(--light-bg);
+        /* Seção de Filtro */
+        .filter-section {
+            background: linear-gradient(135deg, var(--light-bg) 0%, #fff5f7 100%);
+            border: 2px solid var(--card-border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
         }
 
-        .table-bordered th,
-        .table-bordered td {
-            border-color: var(--card-border);
+        .filter-section label {
+            color: var(--darker-pink);
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
         }
 
-        .thead-dark th {
+        .filter-section .form-control,
+        .filter-section .form-select {
+            border: 2px solid var(--card-border);
+            border-radius: 8px;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-section .form-control:focus,
+        .filter-section .form-select:focus {
+            border-color: var(--darker-pink);
+            box-shadow: 0 0 0 0.2rem rgba(255, 105, 180, 0.25);
+        }
+
+        .btn-filter {
             background-color: var(--darker-pink);
             color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .btn-filter:hover {
+            background-color: var(--darker-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+
+        /* Layout de Cartões */
+        .locais-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .local-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #fff5f7 100%);
+            border: 2px solid var(--card-border);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .local-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--darker-pink), var(--darker-purple));
+        }
+
+        .local-card:hover {
             border-color: var(--darker-pink);
+            box-shadow: 0 8px 25px var(--shadow-color);
+            transform: translateY(-8px);
         }
 
-        .table-hover tbody tr:hover {
-            background-color: var(--primary-pink) !important;
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--darker-pink), var(--darker-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
         }
 
-        .table-hover tbody tr:hover td {
+        .card-title {
+            color: var(--darker-pink);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .card-type {
+            display: inline-block;
+            background-color: var(--primary-pink);
+            color: var(--darker-pink);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .card-info {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            gap: 10px;
+        }
+
+        .card-info i {
+            color: var(--darker-purple);
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .card-info-content {
+            flex: 1;
+        }
+
+        .card-info-label {
+            color: var(--text-color);
+            font-weight: bold;
+            font-size: 0.85rem;
+            display: block;
+        }
+
+        .card-info-value {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            word-break: break-word;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .btn-contact {
+            flex: 1;
+            background-color: var(--darker-pink);
             color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn-contact:hover {
+            background-color: var(--darker-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px var(--shadow-color);
+            color: white;
+            text-decoration: none;
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--darker-pink), var(--darker-purple));
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+
+        .stat-card h6 {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            grid-column: 1 / -1;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--darker-pink);
+            margin-bottom: 20px;
+        }
+
+        .empty-state p {
+            color: var(--light-text);
+            font-size: 1.1rem;
         }
 
         .text-muted {
             color: var(--light-text) !important;
+        }
+
+        @media (max-width: 768px) {
+            .locais-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container-content {
+                padding: 20px;
+            }
+
+            .filter-section {
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -194,7 +411,6 @@
                     <li class="nav-item"><a class="nav-link" href="/grupos/">Grupos de Apoio</a></li>
                     <li class="nav-item"><a class="nav-link" href="/localizacoes/">Localizações</a></li>
                     <li class="nav-item"><a class="nav-link" href="/voluntarias/">Voluntárias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/HistoriaSuperacao/">Histórias</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="recursosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Informações
@@ -203,7 +419,6 @@
                             <li><a class="dropdown-item" href="/informativo/direitos">Seus Direitos</a></li>
                             <li><a class="dropdown-item" href="/informativo/violencia-domestica">Sobre a Violência</a></li>
                             <li><a class="dropdown-item" href="/informativo/canais-apoio">Canais de Apoio</a></li>
-                            
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="/admin/">Administração</a></li>
@@ -219,37 +434,119 @@
     </nav>
 
     <main class="container my-5">
-        <div class="table-container">
-            <h2>Locais de Apoio</h2>
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Nome do local:</th>
-                            <th scope="col">Endereço:</th>
-                            <th scope="col">telefone:</th>
-                            <th scope="col">Tipo de Local:</th>
-                            <th scope="col">Distância:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for local in locais %}
-                        <tr>
-                            <td>{{ local.nome }}</td>
-                            <td>{{ local.endereco }}</td>
-                            <td>{{ local.telefone }}</td>
-                            <td>{{ local.tipo_local }}</td>
-                            <td>{{ local.distancia }}</td>
+        <div class="container-content">
+            <h2><i class="fas fa-location-dot"></i> Locais de Apoio</h2>
 
+            <!-- Seção de Filtro -->
+            <div class="filter-section">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="filterTipo">Filtrar por Tipo de Local:</label>
+                        <select id="filterTipo" class="form-select">
+                            <option value="">Todos os Tipos</option>
+                            <option value="Delegacia">Delegacia</option>
+                            <option value="Hospital">Hospital</option>
+                            <option value="Abrigo">Abrigo</option>
+                            <option value="Centro de Referência">Centro de Referência</option>
+                            <option value="ONG">ONG</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="filterBusca">Buscar por Nome:</label>
+                        <input type="text" id="filterBusca" class="form-control" placeholder="Digite o nome do local...">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button class="btn-filter" onclick="filtrarLocais()">
+                            <i class="fas fa-search"></i> Filtrar
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="5" class="text-center text-muted">Nenhum Local disponível.</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <!-- Grid de Locais -->
+            <div id="locais-container" class="locais-grid">
+                {% for local in locais %}
+                <div class="local-card" data-tipo="{{ local.tipo_local|lower }}" data-nome="{{ local.nome|lower }}">
+                    <div class="card-icon">
+                        {% if local.tipo_local == 'Delegacia' %}
+                            <i class="fas fa-shield-alt"></i>
+                        {% elif local.tipo_local == 'Hospital' %}
+                            <i class="fas fa-hospital"></i>
+                        {% elif local.tipo_local == 'Abrigo' %}
+                            <i class="fas fa-home"></i>
+                        {% elif local.tipo_local == 'Centro de Referência' %}
+                            <i class="fas fa-building"></i>
+                        {% elif local.tipo_local == 'ONG' %}
+                            <i class="fas fa-handshake"></i>
+                        {% else %}
+                            <i class="fas fa-map-pin"></i>
+                        {% endif %}
+                    </div>
+
+                    <h5 class="card-title">{{ local.nome }}</h5>
+                    <span class="card-type">{{ local.tipo_local }}</span>
+
+                    <div class="card-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="card-info-content">
+                            <span class="card-info-label">Endereço</span>
+                            <span class="card-info-value">{{ local.endereco }}</span>
+                        </div>
+                    </div>
+
+                    <div class="card-info">
+                        <i class="fas fa-phone"></i>
+                        <div class="card-info-content">
+                            <span class="card-info-label">Telefone</span>
+                            <span class="card-info-value">{{ local.telefone }}</span>
+                        </div>
+                    </div>
+
+                    {% if local.distancia %}
+                    <div class="card-info">
+                        <i class="fas fa-road"></i>
+                        <div class="card-info-content">
+                            <span class="card-info-label">Distância Aproximada</span>
+                            <span class="card-info-value">{{ local.distancia }}</span>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="card-actions">
+                        <a href="tel:{{ local.telefone }}" class="btn-contact">
+                            <i class="fas fa-phone"></i> Ligar
+                        </a>
+                        <a href="https://maps.google.com/?q={{ local.endereco }}" target="_blank" rel="noopener noreferrer" class="btn-contact">
+                            <i class="fas fa-map"></i> Mapa
+                        </a>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="empty-state">
+                    <i class="fas fa-inbox"></i>
+                    <p>Nenhum local de apoio encontrado.</p>
+                    <p class="text-muted">Tente ajustar seus filtros ou volte mais tarde.</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Seção de Estatísticas -->
+            <div class="stats-section">
+                <div class="stat-card">
+                    <h6>Total de Locais</h6>
+                    <h3>{{ locais|length }}</h3>
+                </div>
+                <div class="stat-card">
+                    <h6>Tipos Diferentes</h6>
+                    <h3>{{ tipos_unicos|length }}</h3>
+                </div>
+                <div class="stat-card">
+                    <h6>Locais com Telefone</h6>
+                    <h3>{{ locais_com_telefone }}</h3>
+                </div>
             </div>
         </div>
     </main>
@@ -262,6 +559,32 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function filtrarLocais() {
+            const filterTipo = document.getElementById('filterTipo').value.toLowerCase();
+            const filterBusca = document.getElementById('filterBusca').value.toLowerCase();
+            const cards = document.querySelectorAll('.local-card');
+
+            cards.forEach(card => {
+                const tipo = card.getAttribute('data-tipo');
+                const nome = card.getAttribute('data-nome');
+
+                const matchTipo = filterTipo === '' || tipo === filterTipo;
+                const matchBusca = filterBusca === '' || nome.includes(filterBusca);
+
+                if (matchTipo && matchBusca) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Permitir filtro ao pressionar Enter
+        document.getElementById('filterBusca').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') filtrarLocais();
+        });
+    </script>
 </body>
 </html>
 
