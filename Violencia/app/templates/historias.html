@@ -1,0 +1,622 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórias de Superação - Sistema de Apoio à Mulher</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Cores Personalizadas */
+        :root {
+            --primary-pink: #FFC0CB;
+            --darker-pink: #FF69B4; /* Rosa choque */
+            --light-bg: #FFF0F5; /* Fundo rosa muito claro  */
+            --text-color: #333333; 
+            --light-text: #555555; 
+            --card-bg: #FFFFFF;
+            --card-border: #FFD1DC; 
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --darker-purple: #ec37a1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .navbar {
+            background-color: var(--darker-pink) !important; 
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px var(--shadow-color);
+        }
+
+        .navbar-brand {
+            color: rgb(247, 231, 244) !important;
+            font-weight: bold;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand .icon {
+            margin-right: 8px;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: rgb(245, 236, 243) !important;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: var(--darker-purple) !important;
+            color: rgb(251, 239, 252) !important;
+        }
+
+        .dropdown-menu {
+            background-color: var(--darker-pink);
+            border: none;
+        }
+
+        .dropdown-item {
+            color: rgb(244, 236, 245);
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--primary-pink);
+            color: rgb(210, 203, 212);
+        }
+
+        .btn-emergency {
+            background-color: var(--darker-purple);
+            color: rgb(253, 253, 253);
+            font-weight: bold;
+            border: none;
+            padding: 10px 22px;
+            font-size: 1rem;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px var(--darker-pink);
+            transition: all 0.3s ease;
+        }
+
+        .btn-emergency:hover {
+            background-color: var(--darker-pink);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px var(--shadow-color);
+        }
+
+        h2 {
+            color: var(--darker-pink);
+            font-weight: bold;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-pink);
+            border-radius: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            background-color: var(--darker-pink);
+            color: white;
+            margin-top: 60px;
+            box-shadow: 0 -2px 10px var(--shadow-color);
+        }
+
+        .footer p {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .container-content {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .story-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #fff5f7 100%);
+            border: 2px solid var(--card-border);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--darker-pink), var(--darker-purple));
+        }
+
+        .story-card:hover {
+            border-color: var(--darker-pink);
+            box-shadow: 0 6px 20px var(--shadow-color);
+            transform: translateY(-5px);
+        }
+
+        .story-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .story-status {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-pendente {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-publicado {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-rejeitado {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .story-text {
+            color: var(--text-color);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: var(--light-bg);
+            border-left: 4px solid var(--darker-pink);
+            border-radius: 5px;
+        }
+
+        .story-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .meta-item:hover {
+            background-color: var(--primary-pink);
+        }
+
+        .meta-item i {
+            color: var(--darker-purple);
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .meta-item-content strong {
+            color: var(--text-color);
+            display: block;
+            font-size: 0.8rem;
+            margin-bottom: 3px;
+        }
+
+        .meta-item-content span {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .filter-section {
+            background-color: var(--light-bg);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .filter-section label {
+            color: var(--darker-pink);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .btn-filter {
+            background-color: var(--darker-pink);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn-filter:hover {
+            background-color: var(--darker-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+
+        .btn-submit {
+            background-color: var(--darker-pink);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 20px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--darker-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--darker-pink), var(--darker-purple));
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+
+        .stat-card h6 {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--darker-pink);
+            margin-bottom: 20px;
+        }
+
+        .empty-state p {
+            color: var(--light-text);
+            font-size: 1.1rem;
+        }
+
+        .submit-story-section {
+            background: linear-gradient(135deg, var(--light-bg) 0%, #fff5f7 100%);
+            border: 2px dashed var(--card-border);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .submit-story-section h4 {
+            color: var(--darker-pink);
+            margin-bottom: 15px;
+        }
+
+        .submit-story-section p {
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+
+        .text-muted {
+            color: var(--light-text) !important;
+        }
+
+        @media (max-width: 768px) {
+            .story-meta {
+                grid-template-columns: 1fr;
+            }
+
+            .story-header {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><span class="icon">🌸</span> Apoio a Mulher</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/denuncias/">Denúncias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/informativos/">Informativos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/chat/">Chat de Apoio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/locais/">Locais de Apoio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/grupos/">Grupos de Apoio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/localizacoes/">Localizações</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/voluntarias/">Voluntárias</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="recursosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Informações
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="recursosDropdown">
+                            <li><a class="dropdown-item" href="/informativo/direitos">Seus Direitos</a></li>
+                            <li><a class="dropdown-item" href="/informativo/violencia-domestica">Sobre a Violência</a></li>
+                            <li><a class="dropdown-item" href="/informativo/canais-apoio">Canais de Apoio</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/">Administração</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <button onclick="window.location.href='https://www.google.com';" class="btn-emergency">
+                    ⚡ Sair Rápido
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="container-content">
+            <h2>Histórias de Superação</h2>
+
+            <div class="submit-story-section">
+                <h4>
+                    <i class="fas fa-pen-fancy"></i> Compartilhe Sua História
+                </h4>
+                <p>Sua história pode inspirar outras mulheres. Compartilhe sua jornada de superação de forma anônima e segura.</p>
+                <button class="btn-submit" data-bs-toggle="modal" data-bs-target="#submitStoryModal">
+                    <i class="fas fa-plus-circle"></i> Enviar História
+                </button>
+            </div>
+
+            <!-- Seção de Filtro -->
+            <div class="filter-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="filterStatus">Filtrar por Status:</label>
+                        <select id="filterStatus" class="form-select">
+                            <option value="">Todos</option>
+                            <option value="publicado">Publicado</option>
+                            <option value="pendente">Pendente</option>
+                            <option value="rejeitado">Rejeitado</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-end">
+                        <button class="btn-filter w-100" onclick="filtrarHistorias()">
+                            <i class="fas fa-search"></i> Filtrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de Histórias -->
+            <div id="historias-container">
+                {% for historia in historias %}
+                <div class="story-card" data-status="{{ historia.status|lower }}">
+                    <div class="story-header">
+                        <div>
+                            <h5 style="color: var(--darker-pink); margin: 0;">
+                                <i class="fas fa-heart"></i> História #{{ historia.id }}
+                            </h5>
+                        </div>
+                        <span class="story-status status-{{ historia.status|lower }}">
+                            {% if historia.status == 'publicado' %}
+                                <i class="fas fa-check-circle"></i> Publicado
+                            {% elif historia.status == 'pendente' %}
+                                <i class="fas fa-clock"></i> Pendente
+                            {% else %}
+                                <i class="fas fa-times-circle"></i> Rejeitado
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    <div class="story-text">
+                        <p>{{ historia.texto }}</p>
+                    </div>
+
+                    <div class="story-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div class="meta-item-content">
+                                <strong>Enviado em:</strong>
+                                <span>{{ historia.data_envio|date:"d/m/Y H:i" }}</span>
+                            </div>
+                        </div>
+
+                        {% if historia.data_publicacao %}
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-check"></i>
+                            <div class="meta-item-content">
+                                <strong>Publicado em:</strong>
+                                <span>{{ historia.data_publicacao|date:"d/m/Y H:i" }}</span>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="meta-item">
+                            <i class="fas fa-eye"></i>
+                            <div class="meta-item-content">
+                                <strong>Visualizações:</strong>
+                                <span>{{ historia.visualizacoes }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="empty-state">
+                    <i class="fas fa-book-open"></i>
+                    <p>Nenhuma história encontrada no momento.</p>
+                    <p class="text-muted">Seja a primeira a compartilhar sua história de superação!</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Seção de Estatísticas -->
+            <div class="stats-section">
+                <div class="stat-card">
+                    <h6>Total de Histórias</h6>
+                    <h3>{{ historias|length }}</h3>
+                </div>
+                <div class="stat-card">
+                    <h6>Histórias Publicadas</h6>
+                    <h3>{{ historias_publicadas }}</h3>
+                </div>
+                <div class="stat-card">
+                    <h6>Total de Visualizações</h6>
+                    <h3>{{ total_visualizacoes }}</h3>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para Enviar História -->
+    <div class="modal fade" id="submitStoryModal" tabindex="-1" aria-labelledby="submitStoryLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: var(--darker-pink); color: white;">
+                    <h5 class="modal-title" id="submitStoryLabel">
+                        <i class="fas fa-pen-fancy"></i> Compartilhe Sua História
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="submitStoryForm">
+                        <div class="mb-3">
+                            <label for="storyText" class="form-label">Sua História (máximo 300 caracteres):</label>
+                            <textarea class="form-control" id="storyText" rows="6" placeholder="Compartilhe sua história de superação..." maxlength="300" required></textarea>
+                            <small class="form-text text-muted">
+                                <span id="charCount">0</span>/300 caracteres
+                            </small>
+                        </div>
+                        <div class="alert alert-info" role="alert">
+                            <i class="fas fa-shield-alt"></i> <strong>Sua privacidade é importante:</strong> Sua história será publicada de forma anônima e segura.
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn-submit" onclick="enviarHistoria()">
+                        <i class="fas fa-paper-plane"></i> Enviar História
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>📞 Disque 180 - Central de Atendimento à Mulher</p>
+            <p>&copy; 2025 Sistema de Apoio à Mulher. Interface leve, discreta e responsiva.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Contador de caracteres
+        document.getElementById('storyText').addEventListener('input', function() {
+            document.getElementById('charCount').textContent = this.value.length;
+        });
+
+        function filtrarHistorias() {
+            const filterStatus = document.getElementById('filterStatus').value.toLowerCase();
+            const cards = document.querySelectorAll('.story-card');
+
+            cards.forEach(card => {
+                const status = card.getAttribute('data-status');
+
+                if (filterStatus === '' || status === filterStatus) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function enviarHistoria() {
+            const texto = document.getElementById('storyText').value;
+
+            if (texto.trim() === '') {
+                alert('Por favor, escreva sua história antes de enviar.');
+                return;
+            }
+
+            alert('História enviada com sucesso! Obrigado por compartilhar sua história de superação.');
+            document.getElementById('submitStoryForm').reset();
+            document.getElementById('charCount').textContent = '0';
+            bootstrap.Modal.getInstance(document.getElementById('submitStoryModal')).hide();
+        }
+    </script>
+</body>
+</html>
+

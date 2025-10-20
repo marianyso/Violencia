@@ -37,7 +37,12 @@ class Denuncias(models.Model):
 
 
 class ChatApoio(models.Model):
-    pessoa_anonima = models.ForeignKey(PessoaAnonima, on_delete=models.CASCADE, verbose_name="Pessoa Anônima")
+    pessoa_anonima = models.ForeignKey(
+        PessoaAnonima, 
+        on_delete=models.SET_NULL, 
+        null=True,
+        blank=True,
+        verbose_name="Pessoa Anônima")
     mensagem = models.TextField(verbose_name="Mensagem")
     data_mensagem = models.DateTimeField(default=timezone.now, verbose_name="Data da Mensagem")
     respondida = models.BooleanField(default=False, verbose_name="Respondida")
@@ -48,6 +53,7 @@ class ChatApoio(models.Model):
     class Meta:
         verbose_name = "Chat de Apoio"
         verbose_name_plural = "Chats de Apoio"
+
 class Informativo(models.Model):
     descricao = models.TextField(verbose_name="Descrição do conteúdo informativo")
     tipo_conteudo = models.CharField(max_length=100, verbose_name="Tipo de conteúdo")

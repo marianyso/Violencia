@@ -13,7 +13,7 @@ urlpatterns = [
 
     path("chat/", ChatApoioView.as_view(), name="chat"),
 
-    path("locais/", LocalApoioView.as_view(), name="local"),
+    path("locais/", LocalApoioView.as_view(), name="locais"),
 
     path("grupos/", GrupoApoioView.as_view(), name="grupo"),
 
@@ -21,6 +21,6 @@ urlpatterns = [
 
     path("voluntarias/", VoluntariasView.as_view(), name="voluntarias"),
 
-    path("historias/", HistoriaSuperacaoView.as_view(), name="historias"),
+    path("HistoriaSuperacao/", HistoriaSuperacaoView.as_view(), name="historiasuperacao"),
 
 ]

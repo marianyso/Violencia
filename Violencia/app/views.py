@@ -20,17 +20,17 @@ class InformativoView(View):
 class ChatApoioView(View):
     def get(self, request, *args, **kwargs):
         chats = ChatApoio.objects.all()
-        return render(request, 'chat_apoio.html', {'chats': chats})
+        return render(request, 'chat.html', {'chats': chats})
 
 class LocalApoioView(View):
     def get(self, request, *args, **kwargs):
         locais = LocalApoio.objects.all()
-        return render(request, 'local_apoio.html', {'locais': locais})
+        return render(request, 'locais.html', {'locais': locais})
 
 class GrupoApoioView(View):
     def get(self, request, *args, **kwargs):
         grupos = GrupoApoio.objects.all()
-        return render(request, 'grupo_apoio.html', {'grupos': grupos})
+        return render(request, 'grupos.html', {'grupos': grupos})
 
 class LocalizacaoView(View):
     def get(self, request, *args, **kwargs):
